@@ -1,0 +1,124 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.funcaoregex;
+
+/**
+ *
+ * @author João Vitor Maia Lippi
+ */
+public class CPF {
+    private String cpf;
+
+    // Construtor da classe CPF
+    public CPF(String cpf) {
+        this.cpf = cpf;
+    }
+
+    // Função para remover traços e pontos do CPF
+    public String removerPontos() {
+        return cpf.replaceAll("[.-]", "");
+    }
+}
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package com.mycompany.funcaoregex;
+
+/**
+ *
+ * @author João Vitor Maia Lippi
+ */
+public class FuncaoRegex {
+    public static void main(String[] args) {
+        // Exemplo de uso das classes CPF, ValorBRL e Telefone
+
+        // Manipulação de CPF
+        CPF cpf = new CPF("123.456.789-10");
+        String cpfSemPontos = cpf.removerPontos();
+        System.out.println("CPF sem pontos: " + cpfSemPontos);
+
+        // Validação de valor em BRL
+        ValorBRL valorBRL1 = new ValorBRL("R$ 1000,10");
+        ValorBRL valorBRL2 = new ValorBRL("R$0,99");
+        ValorBRL valorBRL3 = new ValorBRL("r$123.456,78");
+        ValorBRL valorBRL4 = new ValorBRL("R$ 1000.1"); // Valor incorreto
+
+        boolean valido1 = valorBRL1.validar();
+        boolean valido2 = valorBRL2.validar();
+        boolean valido3 = valorBRL3.validar();
+        boolean valido4 = valorBRL4.validar();
+
+        System.out.println("Valor BRL 1 válido? " + valido1);
+        System.out.println("Valor BRL 2 válido? " + valido2);
+        System.out.println("Valor BRL 3 válido? " + valido3);
+        System.out.println("Valor BRL 4 válido? " + valido4);
+
+        // Validação de número de telefone
+        Telefone telefone1 = new Telefone("(43)35428000");
+        Telefone telefone2 = new Telefone("(43)3542 8000");
+        Telefone telefone3 = new Telefone("(43) 3542 8000");
+        Telefone telefone4 = new Telefone("(43) 3542-8000");
+        Telefone telefone5 = new Telefone("(43) 99999-000");
+        Telefone telefone6 = new Telefone("(43) 3542-800"); // Número incorreto
+
+        boolean telefoneValido1 = telefone1.validar();
+        boolean telefoneValido2 = telefone2.validar();
+        boolean telefoneValido3 = telefone3.validar();
+        boolean telefoneValido4 = telefone4.validar();
+        boolean telefoneValido5 = telefone5.validar();
+        boolean telefoneValido6 = telefone6.validar();
+
+        System.out.println("Telefone 1 válido? " + telefoneValido1);
+        System.out.println("Telefone 2 válido? " + telefoneValido2);
+        System.out.println("Telefone 3 válido? " + telefoneValido3);
+        System.out.println("Telefone 4 válido? " + telefoneValido4);
+        System.out.println("Telefone 5 válido? " + telefoneValido5);
+        System.out.println("Telefone 6 válido? " + telefoneValido6);
+    }
+}
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.funcaoregex;
+
+/**
+ *
+ * @author João Vitor Maia Lippi
+ */
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Telefone {
+    private String telefone;
+
+    // Construtor da classe Telefone
+    public Telefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    // Função para validar um número de telefone
+    public boolean validar() {
+        String regex = "^\\(\\d{2}\\)\\s?\\d{4,5}[-\\s]?\\d{4}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(telefone);
+        return matcher.matches();
+    }
+}
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.mycompany</groupId>
+    <artifactId>FuncaoRegex</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>19</maven.compiler.source>
+        <maven.compiler.target>19</maven.compiler.target>
+        <exec.mainClass>com.mycompany.funcaoregex.FuncaoRegex</exec.mainClass>
+    </properties>
+</project>
